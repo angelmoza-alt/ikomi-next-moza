@@ -17,12 +17,14 @@ export default function Hero({ titulo, resaltado, subtitulo, imagen = "/images/h
       {/* preload (antes "priority"): es la imagen más grande visible al cargar, se descarga primero (mejor LCP) */}
       <Image
         src={imagen}
-        alt="Repuestos para camiones: discos de embrague, frenos, filtros y piñones"
+        alt="Repuestos metálicos para camiones: engranajes, piñones y piezas de motor"
         fill
         preload
         sizes="100vw"
-        className="-z-10 object-cover"
+        className="-z-20 object-cover"
       />
+      {/* Capa oscura: la foto es clara (piezas plateadas) y el texto blanco necesita contraste */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-l from-black/80 via-black/60 to-black/40" aria-hidden="true" />
       <div className="mx-auto w-full max-w-6xl px-4">
         <div className={`ml-auto max-w-2xl animate-fade-up text-white ${compacto ? "text-left md:text-right" : "text-right"}`}>
           {resaltado && <p className="font-heading text-3xl font-extrabold md:text-5xl">{resaltado}</p>}

@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 };
 
 const galeria = [
-  { titulo: "Equipo", src: "/images/nosotros/equipo.jpg", alt: "Equipo de trabajo de IKOMI PERÚ junto a camiones de distintas marcas" },
-  { titulo: "Almacén", src: "/images/nosotros/almacen.jpg", alt: "Pasillo del almacén con estantes llenos de repuestos" },
-  { titulo: "Tienda", src: "/images/nosotros/tienda.jpg", alt: "Fachada de la tienda IKOMI PERÚ con vitrinas de repuestos" },
-  { titulo: "Empresa", src: "/images/nosotros/empresa.jpg", alt: "Edificio principal de la empresa IKOMI PERÚ" },
+  { titulo: "Equipo", src: "/images/nosotros/equipo.jpg", alt: "Mecánico revisando el motor de un vehículo en el taller" },
+  { titulo: "Almacén", src: "/images/nosotros/almacen.jpg", alt: "Pasillo del almacén con estantes llenos de cajas de repuestos" },
+  { titulo: "Tienda", src: "/images/nosotros/tienda.jpg", alt: "Estantes de la tienda con productos y repuestos en exhibición" },
+  { titulo: "Empresa", src: "/images/nosotros/empresa.jpg", alt: "Almacén central con mercadería lista para despacho" },
 ];
 
 export default function NosotrosPage() {

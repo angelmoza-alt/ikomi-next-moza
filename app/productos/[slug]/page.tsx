@@ -45,7 +45,7 @@ export default async function ProductoDetallePage({ params }: PageProps<"/produc
           </nav>
 
           <div className="grid items-center gap-10 md:grid-cols-2">
-            <div className="rounded bg-white p-6 shadow ring-1 ring-gray-100">
+            <figure className="overflow-hidden rounded shadow-lg ring-1 ring-gray-100">
               <Image
                 src={producto.imagen}
                 alt={`${producto.nombre} marca ${producto.marca}`}
@@ -53,9 +53,10 @@ export default async function ProductoDetallePage({ params }: PageProps<"/produc
                 height={800}
                 preload
                 sizes="(min-width: 768px) 50vw, 100vw"
-                className="h-auto w-full"
+                className="aspect-square h-auto w-full object-cover"
               />
-            </div>
+              {producto.credito && <figcaption className="bg-surface px-3 py-1.5 text-xs text-muted">{producto.credito}</figcaption>}
+            </figure>
             <div>
               <p className="text-sm font-semibold uppercase tracking-wide text-accent">{producto.categoria}</p>
               <h1 className="mt-2 text-3xl font-bold md:text-4xl">{producto.nombre}</h1>

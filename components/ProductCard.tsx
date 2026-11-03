@@ -17,14 +17,14 @@ export default function ProductCard({ producto, mostrarMarca = true }: Props) {
       href={`/productos/${producto.slug}`}
       className="group flex h-full flex-col overflow-hidden rounded bg-white shadow-sm ring-1 ring-gray-100 transition duration-300 hover:-translate-y-2 hover:shadow-xl focus-visible:-translate-y-2"
     >
-      <div className="overflow-hidden bg-white p-4">
+      <div className="aspect-square overflow-hidden bg-surface">
         <Image
           src={producto.imagen}
           alt={`${producto.nombre} ${producto.marca} para camión`}
           width={800}
           height={800}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="h-auto w-full transition duration-500 group-hover:scale-110"
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
         />
       </div>
       <div className="flex flex-1 flex-col border-t border-gray-100 p-5">

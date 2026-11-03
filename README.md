@@ -4,7 +4,7 @@ Réplica académica del sitio web de **IKOMI PERÚ S.R.L.** (importadora de repu
 
 > **Alumno:** Angel Moza Cabanillas · **Curso:** Desarrollo de Aplicaciones Web Avanzado (Tecsup) · **Docente:** Jorge Ventura Gonzales
 
-- 🌐 **Demo en Render:** `https://ikomi-next-moza.onrender.com` *(actualizar con la URL real después del despliegue)*
+- 🌐 **Demo en Render:** https://ikomi-next-moza.onrender.com
 - 📄 Decisiones técnicas: [DECISIONES.md](./DECISIONES.md)
 - 🤖 Bitácora de uso de IA: [BITACORA_IA.md](./BITACORA_IA.md)
 - 📸 Capturas (build, Network y responsive): [evidencias/](./evidencias)
@@ -161,7 +161,7 @@ graph TD
 
 ## Imágenes
 
-Las imágenes de `public/images/` son **ilustraciones provisionales** con la misma proporción que las del sitio original. Para usar las fotos reales de IKOMI basta con reemplazar cada archivo **con el mismo nombre** (por ejemplo `public/images/productos/disco-de-embrague.png`). No hay que tocar el código.
+Las fotos son reales y vienen de bancos con licencia libre (Unsplash y Wikimedia Commons). Se recortaron al tamaño de cada sección: productos 800×800, Nosotros 640×500 y hero 1920×900. Las fuentes y licencias de cada una están en [CREDITOS_IMAGENES.md](./CREDITOS_IMAGENES.md).
 
 ---
 
