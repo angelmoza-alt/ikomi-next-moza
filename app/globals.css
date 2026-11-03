@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+  Tema de IKOMI: los colores y las fuentes se definen UNA sola vez aquí.
+  Tailwind v4 convierte cada variable --color-* en utilidades
+  (bg-primary, text-accent, border-highlight, etc.).
+  Para cambiar el color principal de todo el sitio basta con editar --color-primary.
+*/
+@theme {
+  --color-primary: #2b3fa8; /* azul corporativo (navbar) */
+  --color-primary-dark: #1c2f8f;
+  --color-accent: #e03131; /* rojo IKOMI (botones, líneas de títulos) */
+  --color-accent-dark: #c92a2a;
+  --color-highlight: #fcc419; /* amarillo del enlace activo */
+  --color-dark: #1f1f1f; /* secciones oscuras */
+  --color-dark-card: #2a2a2a;
+  --color-ink: #212529; /* texto principal */
+  --color-muted: #6c757d;
+  --color-surface: #f8f9fa;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-sans: var(--font-open-sans), system-ui, sans-serif;
+  --font-heading: var(--font-raleway), system-ui, sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-marquee: marquee 25s linear infinite;
+  --animate-fade-up: fade-up 0.8s ease-out both;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading;
+  }
+}
+
+/* Corte diagonal de las secciones oscuras (Servicios y Marcas en la referencia) */
+@utility clip-diagonal {
+  clip-path: polygon(0 6%, 100% 0, 100% 94%, 0 100%);
+}
+
+/* Accesibilidad: si el usuario pidió reducir movimiento, se desactivan las animaciones */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
