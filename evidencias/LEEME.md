@@ -6,12 +6,16 @@
 | `responsive-375-*.png`, `responsive-768-*.png`, `responsive-1280-*.png` | 4.4 — Inicio, Productos y Detalle en 3 anchos |
 | `responsive-375-menu-hamburguesa-abierto.png` | 3.3 — Menú responsive |
 | `404-producto-inexistente.png` | 2.2 — `notFound()` con slug inválido |
-| `network-link.png` y `network-a-href.png` | 3.4 — Experimento Link vs `<a>` (**tomar en Chrome**) |
+| `network-link.png` y `network-link-doc.png` | 3.4 — Navegación con `Link` en DevTools > Network (filtros All y Doc) |
+| `network-a-href.png` y `network-a-href-doc.png` | 3.4 — Navegación con `<a>` normal en DevTools > Network (filtros All y Doc) |
 
-## Cómo tomar las capturas de Network (3.4)
+## Cómo se hizo el experimento de Network (3.4)
 
-1. Ejecuta `npm run build` y luego `npm run start`, y abre http://localhost:3000.
-2. Abre DevTools (F12) → pestaña **Network** → marca **Preserve log** y filtra por **All**.
-3. **Con Link:** haz clic en "Nosotros" en el menú. Toma la captura → `network-link.png` (no aparece ningún `document`).
-4. **Con `<a>`:** en `components/Navbar.tsx` reemplaza temporalmente `<Link` por `<a` y `</Link>` por `</a>` (solo para el experimento). Reinicia y haz clic en otro enlace. Toma la captura → `network-a-href.png` (aparece `document` y se vuelven a descargar el CSS, las fuentes y el JS).
-5. **Revierte el cambio** (`git checkout components/Navbar.tsx`).
+En Chrome, sobre https://ikomi-next-moza.onrender.com:
+1. F12 → **Network** → marcar **Keep log** → filtro **All**.
+2. Clic en **Nosotros** del menú (`Link`) → captura con **All** (4 peticiones, 0 B) y con **Doc** (0 documentos).
+3. En **Console** se agregó un enlace `<a>` temporal:
+   ```js
+   const a=document.createElement('a');a.href='/servicios';a.textContent='IR CON <a>';a.style.cssText='position:fixed;top:90px;left:20px;z-index:9999;background:red;color:#fff;padding:10px';document.body.appendChild(a)
+   ```
+4. Clic en el botón rojo **IR CON <a>** → captura con **All** (16 peticiones, 714 kB de recursos) y con **Doc** (1 documento: `servicios`).

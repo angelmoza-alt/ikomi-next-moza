@@ -1,6 +1,6 @@
 # DECISIONES — ikomi-next-moza
 
-Registro de las decisiones técnicas que tomé para replicar el sitio de **IKOMI PERÚ** con Next.js 16 (App Router).
+Registro de las decisiones técnicas tomadas durante el desarrollo del sitio de IKOMI PERÚ con Next.js 16 (App Router). Para ello utilicé Claude como herramienta de apoyo para evaluar alternativas, generar código y resolver dudas técnicas. Revisé las propuestas, probé su funcionamiento y seleccioné las opciones que mejor se ajustaban a los requisitos del examen.
 
 > Alumno: Angel Moza Cabanillas · Desarrollo de Aplicaciones Web Avanzado · Tecsup
 
@@ -75,14 +75,17 @@ En el layout envolví `<Navbar />` en `<Suspense fallback={<NavbarFallback />}>`
 
 ### 3.4 Experimento `Link` frente a `<a href>`
 
-Cambié temporalmente un `Link` del menú por `<a href="/servicios">` y comparé en DevTools > Network (capturas en `evidencias/`):
+Hice el experimento en Chrome DevTools > Network (con "Keep log" activado) sobre el sitio publicado en Render. Primero hice clic en "Nosotros" del menú (`Link`). Luego, desde la consola, agregué temporalmente un enlace `<a href="/servicios">` normal a la página y le hice clic. Tomé las capturas con el filtro **All** y con el filtro **Doc** (`evidencias/network-link*.png` y `evidencias/network-a-href*.png`).
 
-| | `<Link href="/nosotros">` | `<a href="/servicios">` |
+| | `<Link href="/nosotros">` (Navbar) | `<a href="/servicios">` |
 |---|---|---|
-| Petición `document` | **No hay** | **Sí**: se descarga el HTML completo |
-| CSS, fuentes y JS | No se vuelven a pedir | Se vuelven a pedir (1 CSS, 2 fuentes, 10 scripts) |
-| Total de peticiones | Solo las 4 imágenes nuevas de la página | **25 peticiones** |
-| Estado de JavaScript | Se conserva (Navbar y botones no se reinician) | Se pierde (la página se recarga entera) |
+| Peticiones totales | **4** (solo las imágenes de Nosotros) | **16** |
+| Transferido | **0 B** (todo desde la caché en memoria) | **4.8 kB** |
+| Recursos cargados | 184 kB | **714 kB** |
+| Filtro **Doc** | **0**: no se pidió ningún documento | **1**: `servicios`, tipo `document` (304) |
+| Eventos de carga | No hay | `DOMContentLoaded` 676 ms y `Load` 732 ms |
+
+El `document` de servicios salió con estado **304** (Not Modified): el servidor confirmó que el HTML no había cambiado y el navegador usó su copia guardada. Aun así fue una navegación completa: la página anterior se descartó y se volvieron a cargar y ejecutar el CSS, las fuentes y todos los scripts. Por eso aparecen `DOMContentLoaded` y `Load`, que solo ocurren cuando se carga una página entera.
 
 **Por qué:** `Link` intercepta el clic y hace una navegación del lado del cliente. Además, cuando el enlace aparece en pantalla, Next.js hace un *prefetch* del payload RSC de esa ruta (`/nosotros?_rsc=...`), así que al hacer clic los datos ya están y solo cambia el contenido de `children`. Con `<a>`, el navegador hace una navegación tradicional: tira la página actual y vuelve a cargarlo todo desde cero.
 
