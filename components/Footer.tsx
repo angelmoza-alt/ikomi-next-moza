@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Mail, MapPin, PhoneCall } from "lucide-react";
 import { empresa, navegacion } from "@/data/site";
 import NavIcon from "./NavIcon";
-import SectionTitle from "./SectionTitle";
 import SocialIcon, { type Red } from "./SocialIcon";
 
 // Server Component: es contenido fijo, no necesita JavaScript en el navegador.
@@ -70,9 +69,8 @@ export default async function Footer() {
         </div>
 
         <div>
-          <SectionTitle as="h2" align="left" light className="text-lg">
-            Links
-          </SectionTitle>
+          <h2 className="text-lg font-bold">Links</h2>
+          <span className="mt-3 mb-6 block h-0.5 w-8 bg-accent" aria-hidden="true" />
           <ul className="space-y-3">
             {navegacion.map((item) => (
               <li key={item.href}>
